@@ -1,24 +1,38 @@
 import React, { useState } from 'react'
+import useTodoStore from '../../store/useTodoStore'
+import todoApi from '../../api/todoApi'
+import NewTask from './NewTask'
 
-function ToDoItem(props) {
-  const { item: { id, title, date }, idx } = props
+function ToDoItem() {
+  const todos = useTodoStore((state) => state.todos)
+  const actionGetTodo = useTodoStore((state) => state.actionGetTodo)
+  console.log('todos', todos)
+
+  const handleDelete = async (id) => {
+    try {
+      await todoApi.deleteTodo(id, 25)
+      actionGetTodo()
+
+      alert('delete success!!')
+    } catch (error) {
+      console.log(error)
+      alert('delete invalid!!')
+    }
+  }
   return (
-    <>
-      <ul className="list bg-base-100 rounded-box shadow-md">
-        <li className="p-4 pb-2 text-xs opacity-60 tracking-wide">To Do List</li>
-        <li className="list-row">
-          <div className='h-6 w-6 rounded-full shadow-sm text-white bg-white text-center content-center'>{idx+1}</div>
-          <div>
-            <p className='font-semibold'>{title}</p>
-            <p>{date}</p>
-          </div>
-          <button className="btn btn-square btn-ghost">X</button>
-        </li>
-      </ul>
-      <dialog>
-        <form className='rounded-md w-[480px] text-center'></form>
-      </dialog>
-    </>
+    <div className="bg-gray-800 p-4 rounded-xl shadow-inner flex flex-col">
+      {/* <h2 className="text-lg font-semibold text-white mb-2">Tasks</h2> */}
+      <div className="flex flex-col gap-2">
+        {todos.map((item) => (
+          <NewTask
+            key={item.id}
+            item={item}
+            handleDelete={handleDelete}
+            actionGetTodo={actionGetTodo}
+          />
+        ))}
+      </div>
+    </div>
   )
 }
 

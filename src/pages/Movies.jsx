@@ -4,15 +4,15 @@ import MovieList from '../component/MovieList'
 function Movies() {
   const [movies, setMovies] = useState([])
 
-  const FetchMovie = () => {
-    fetch('https://www.themoviedb.org/api/V3/movies')
-    .then(resp => resp.json())
-    .then(data => setMovies(data))
-  }
+  // const FetchMovie = () => {
+  //   fetch('https://www.themoviedb.org/api/V3/movies')
+  //   .then(resp => resp.json())
+  //   .then(data => setMovies(data))
+  // }
 
-  useEffect(() => {
-    FetchMovie()
-  },[])
+  // useEffect(() => {
+  //   FetchMovie()
+  // },[])
 
   return (
     <div>

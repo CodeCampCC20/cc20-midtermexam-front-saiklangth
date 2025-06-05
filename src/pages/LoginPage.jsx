@@ -12,7 +12,7 @@ const initialInput = {
 function LoginPage() {
   const [input, setInput] = useState(initialInput)
   const [inputError, setInputError] = useState(initialInput)
-  
+
   const handleChange = (e) => {
     const { id, value } = e.target
     setInput((prev) => ({ ...prev, [id]: value }))
@@ -46,29 +46,31 @@ function LoginPage() {
   }
 
   return (
-    <div className='w-[300px] h-[300px] border rounded-sm p-4 text-center mx-auto'>
-      <p className='text-2xl font-bold'>Welcome</p>
-      <form onSubmit={handleSubmit} className='p-4'>
-        <InputForm
-          type="text"
-          id="username"
-          value={input.username}
-          placeholder="username"
-          handleChange={handleChange}
-          error={inputError.username}
-        />
+    <div className="min-h-screen background-color: var(--color-black) flex items-center justify-center">
+      <div className="w-full max-w-sm bg-gray-900 border border-gray-700 rounded-xl p-8 text-white shadow-2xl">
+        <p className="text-3xl font-bold mb-6 text-center">Welcome</p>
+        <form onSubmit={handleSubmit} className='space-y-5'>
+          <InputForm
+            type="text"
+            id="username"
+            value={input.username}
+            placeholder="username"
+            handleChange={handleChange}
+            error={inputError.username}
+          />
 
-        <InputForm
-          type="password"
-          id="password"
-          value={input.password}
-          placeholder="password"
-          handleChange={handleChange}
-          error={inputError.password}
-        />
+          <InputForm
+            type="password"
+            id="password"
+            value={input.password}
+            placeholder="password"
+            handleChange={handleChange}
+            error={inputError.password}
+          />
 
-        <button type='submit' className="btn btn-md w-full">LOG IN</button>
-      </form>
+          <button type='submit' className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-lg transition-colors text-lg">LOG IN</button>
+        </form>
+      </div>
     </div>
   )
 }
